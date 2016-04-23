@@ -1,0 +1,24 @@
+<li ng-class="{active: isState('memberCenter.washcar') || stateEquals('memberCenter')}">
+    <a ui-sref="memberCenter.washcar">
+        <span class="menu-text">上门洗车</span>
+    </a>
+</li>
+<li ng-class="{active: isState('memberCenter.waxing')}">
+    <i ></i>
+    <a ui-sref="memberCenter.waxing">
+        <i ></i>
+        <span class="menu-text">上门打蜡</span>
+    </a>
+</li>
+<li ng-class="{active: isState('memberCenter.maintenance')}">
+    <a ui-sref="memberCenter.maintenance">
+        <i ></i>
+        <span class="menu-text">预约保养</span>
+    </a>
+</li>
+<li ng-class="{active: isState('memberCenter.rescue')}">
+    <a ui-sref="memberCenter.rescue">
+        <i ></i>
+        <span class="menu-text">市内救援</span>
+    </a>
+</li>

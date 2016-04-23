@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <title>会员活动详情</title>
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.1/weui.css"/>
+</head>
+<body>
+<article class="weui_article">
+    <h1 th:text="${title}"></h1>
+    <section>
+        <section>
+            <p  th:text="${context}"></p>
+        </section>
+    </section>
+</article>
+<div class="weui_extra_area" th:if="${status}">
+    <a class="weui_btn weui_btn_primary"
+       th:href="@{https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf354b3a19d4fe54b&amp;redirect_uri=http%3A%2F%2Fwechat.bentleyclubsz.com%2Fwx%2Fuser%2Factivity%2Fjoin&amp;response_type=code&amp;scope=snsapi_base(state=${id})}" ontouchstart="">点击报名</a>
+</div>
+</body>
+</html>

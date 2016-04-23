@@ -1,0 +1,52 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm-12 center-block">
+            <form class="form-horizontal " role="form" name="financeForm">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">微信群发对象:</label>
+
+                    <div class="col-sm-9">
+                        <label ng-repeat="group in groupList" class="ace">
+                            <input type="radio" ng-model="pageObj.groupId"
+                                   ng-value="group.id"
+                                    name="group"
+                                    >
+                            <span class="lbl"></span> {{group.name}}
+                        </label>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">微信群发内容:</label>
+
+                    <div class="col-sm-9">
+                        <textarea ng-model="pageObj.context" rows="3" cols="42">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+
+                <alert type="danger" ng-show="errorMessage">
+                    <div class="pre-wrap max-height-200">{{errorMessage}}</div>
+                </alert>
+                <div class="col-md-offset-3 col-md-9" ng-if="showFlag">
+                    <button class="btn btn-primary" type="submit" ng-click="sendMessage()">
+                        <i class="icon-ok bigger-110"></i>
+                        发送
+                    </button>
+
+                    <button class="btn btn-default back" go-back>
+                        <i class="icon-undo bigger-110"></i>
+                        返回
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+

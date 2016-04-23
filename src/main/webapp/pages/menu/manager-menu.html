@@ -1,0 +1,11 @@
+<li ng-class="{active: isState('manager.member') || stateEquals('manager')}">
+    <a ui-sref="manager.member">
+        <span class="menu-text">用户设置</span>
+    </a>
+</li>
+
+<li ng-class="{active: isState('manager.group') || stateEquals('manager')}">
+    <a ui-sref="manager.group">
+        <span class="menu-text">微信群发</span>
+    </a>
+</li>

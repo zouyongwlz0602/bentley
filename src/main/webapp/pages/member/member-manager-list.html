@@ -1,0 +1,59 @@
+<div>
+    <div class="sp-form-body">
+        <div class="panel-group form-section-back">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title" style="display: inline">会员列表</h4>
+                    <!--<div class="pull-right" role="group">-->
+                    <!--<a class="remove-underline" ui-sref="news.dynamic.form"><i-->
+                    <!--class="icon-plus-sign-alt bigger-120" tooltip="添加俱乐部动态"></i></a>-->
+                    <!--</div>-->
+                </div>
+                <table st-table="memberList"
+                       class="table table-striped table-bordered table-condensed table-center">
+                    <thead>
+                    <tr>
+                        <th>微信号</th>
+                        <th>微信名称</th>
+                        <th>是否VIP</th>
+                        <th>VIP开始时间</th>
+                        <th>VIP结束时间</th>
+                        <th>免费洗车次数</th>
+                        <th>免费打蜡次数</th>
+                        <th>免费保养次数</th>
+                        <th>免费市内救援次数</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="member in memberList">
+
+                        <td>{{member.wechatid}}</td>
+                        <td>{{member.wechatname}}</td>
+                        <td ng-if="member.isVip">是</td>
+                        <td ng-if="!member.isVip">否</td>
+                        <td>{{member.startTime | date:'yyyy-MM-dd'}}</td>
+                        <td>{{member.endTime | date:'yyyy-MM-dd'}}</td>
+
+                        <td>{{member.washcarnum}}</td>
+                        <td>{{member.waxingnum}}</td>
+                        <td>{{member.maintenancenum}}</td>
+                        <td>{{member.indoorrenum}}</td>
+                        <td><a class="remove-underline" ui-sref="manager.member.edit({id:member.id})">编辑</a></td>
+
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <!--<tr>-->
+                    <!--<td colspan="9" class="text-center">-->
+                    <!--<div st-items-by-page="30" st-pagination st-template="/pages/templates/pagination.html"></div>-->
+                    <!--</td>-->
+                    <!--</tr>-->
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+

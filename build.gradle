@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.8.RELEASE")
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+war {
+    baseName = 'bently'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+configurations {
+    providedRuntime
+}
+
+springBoot {
+    mainClass = "com.spring.bently.Application"
+}
+
+dependencies {
+    compile(
+            "org.springframework.boot:spring-boot-starter",
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            "org.springframework.boot:spring-boot-starter-thymeleaf",
+            "org.apache.commons:commons-lang3:3.3.2",
+            "commons-io:commons-io:2.4",
+            "commons-codec:commons-codec:1.10",
+            "com.fasterxml.jackson.core:jackson-core:2.4.2",
+            "com.fasterxml.jackson.core:jackson-databind:2.4.2",
+            "junit:junit:4.11",
+            "dom4j:dom4j:1.6.1",
+            "org.springframework.boot:spring-boot-starter-test",
+            "org.springframework.boot:spring-boot-starter-web",
+            'mysql:mysql-connector-java:5.1.36',
+            'com.google.guava:guava:19.0'
+
+
+    )
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+    testCompile(
+            "junit:junit:4.11",
+            "org.springframework.boot:spring-boot-starter-test"
+    )
+}

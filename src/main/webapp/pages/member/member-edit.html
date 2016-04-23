@@ -1,0 +1,95 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm-12 center-block">
+            <form class="form-horizontal " role="form" name="financeForm">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">是否VIP:</label>
+
+                    <div class="col-sm-9">
+                        <label ng-repeat="radioObj in radioArray" class="ace">
+                            <input type="radio" ng-model="member.isVip"
+                                   ng-value="radioObj.code">
+                            <span class="lbl"></span> {{radioObj.name}}
+                        </label>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">VIP开始时间:</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="member.startTime" class="col-xs-12 col-sm-5" sp-date-picker>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">VIP结束时间:</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="member.endTime" class="col-xs-12 col-sm-5" sp-date-picker>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">免费洗车次数:</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="member.washcarnum" class="col-xs-10 col-sm-5">
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">免费打蜡次数:</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="member.waxingnum" class="col-xs-10 col-sm-5">
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">免费保养次数:</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="member.maintenancenum" class="col-xs-10 col-sm-5">
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">免费救援次数:</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="member.indoorrenum" class="col-xs-10 col-sm-5">
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <alert type="danger" ng-show="errorMessage">
+                    <div class="pre-wrap max-height-200">{{errorMessage}}</div>
+                </alert>
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-primary" type="submit" ng-click="updateMember()">
+                        <i class="icon-ok bigger-110"></i>
+                        保存
+                    </button>
+
+                    <button class="btn btn-default back" go-back>
+                        <i class="icon-undo bigger-110"></i>
+                        返回
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+

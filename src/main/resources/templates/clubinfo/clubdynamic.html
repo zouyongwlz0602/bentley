@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <title>俱乐部动态列表</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/dist/lib/weui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/dist/css/jquery-weui.css}" />
+
+</head>
+<body>
+<div class="weui_panel weui_panel_access">
+    <div class="weui_panel_hd">动态列表</div>
+    <div class="weui_panel_bd">
+        <a  th:each="cd : ${cdlist}" th:href="@{/wx/club/dynamic/detail(id=${cd.id})}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                <img class="weui_media_appmsg_thumb" src="/resources/images/binli.jpg" th:alt="${cd.title}" />
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title" th:text="${cd.title}"></h4>
+                <p class="weui_media_desc" th:text="${cd.context}"></p>
+            </div>
+        </a>
+    </div>
+    <!--<a class="weui_panel_ft" href="javascript:void(0);">查看更多</a>-->
+</div>
+<script type="application/javascript" th:src="@{/resources/dist/lib/jquery-2.1.4.js}"></script>
+<script type="application/javascript" th:src="@{/resources/dist/js/jquery-weui.js}"></script>
+</body>
+</html>

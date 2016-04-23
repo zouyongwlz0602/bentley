@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title ncy-breadcrumb-last="{{ncyBreadcrumbLabel}}-宾利俱乐部管理平台"></title>
+    <link rel="shortcut icon" href="/resources/images/binli.jpg" type="image/png"/>
+    <link rel="stylesheet" href="/assets/ace/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/ace/css/bootstrap-timepicker.css"/>
+    <link rel="stylesheet" href="/assets/ace/css/colorpicker.css"/>
+    <link rel="stylesheet" href="/assets/ace/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assets/ace/css/chosen.css"/>
+    <link rel="stylesheet" href="/assets/ace/css/ace.min.css"/>
+    <link rel="stylesheet" href="/assets/angular/angular-ui-select.min.css"/>
+    <link rel="stylesheet" href="/assets/angular/angular-growl.min.css"/>
+    <link rel="stylesheet" href="/assets/angular/angular-datepicker.min.css"/>
+    <link rel="stylesheet" href="/assets/angular/ui-grid.min.css"/>
+    <link rel="stylesheet" href="/assets/angular-chart/css/angular-chart.min.css"/>
+    <link rel="stylesheet" href="/assets/csshake/csshake-slow.min.css"/>
+    <link rel="stylesheet" href="/assets/angular/angular-busy.min.css"/>
+    <link rel="stylesheet" href="/resources/css/style.min.css"/>
+    <script src="/assets/js/xlsx.core.min.js"></script>
+    <script src="/assets/js/alasql.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-default" id="navbar">
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="#/" class="navbar-brand">
+                <img src="/resources/images/binli.jpg" class="logo"/>
+                <strong>宾利俱乐部管理平台</strong>
+            </a>
+            <ul class="nav navbar-nav top-menu" ng-if="user">
+                <li>
+                    <a ng-class="{'top-menu-active':isState('home')}" ui-sref="home">首页</a>
+                </li>
+                <li>
+                    <a ng-class="{'top-menu-active':isState('news')}" ui-sref="news.ship">最新资讯</a>
+                </li>
+                <li>
+                    <a ng-class="{'top-menu-active':isState('destine')}" ui-sref="destine.hotel">预订服务</a>
+                </li>
+                <li>
+                    <a ng-class="{'top-menu-active':isState('memberCenter')}" ui-sref="memberCenter.washcar">会员中心</a>
+                </li>
+                <li>
+                    <a ng-class="{'top-menu-active':isState('manager')}" ui-sref="manager.member">设置</a>
+                </li>
+            </ul>
+        </div>
+        <login-avatar></login-avatar>
+    </div>
+</div>
+
+<div class="main-container" id="main-container">
+    <div ui-view ng-if="user"></div>
+    <div ng-if="!user" style="padding-top: 10%;padding-left: 25%;">
+
+                <div class="col-sm-12">
+                    <form class="form-horizontal" role="form" >
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户名:</label>
+
+                            <div class="col-sm-9">
+                                <input  type="text" ng-model="user.name">
+                            </div>
+                        </div>
+
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密 码:</label>
+                            <div class="col-sm-9">
+                                <input ng-model="user.password"  type="password">
+                            </div>
+                        </div>
+
+                        <alert type="danger" ng-show="loginMessage">
+                            <div class="pre-wrap max-height-200">{{loginMessage}}</div>
+                        </alert>
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-primary" type="submit" ng-click="login(user)">
+                                登入
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+
+    </div>
+</div>
+<script data-main="/js/main" src="/assets/js/require.min.js"></script>
+</body>
+</html>

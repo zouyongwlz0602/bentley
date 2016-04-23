@@ -1,0 +1,43 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm-12 center-block">
+            <form class="form-horizontal " role="form">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 动态标题:</label>
+
+                    <div class="col-sm-9">
+                        <input name="budgetWaterName" type="text" ng-model="clubDynamic.title" class="col-xs-12 col-sm-5">
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 动态内容:</label>
+
+                    <div class="col-sm-9">
+                        <textarea ng-model="clubDynamic.context" rows="3" cols="42">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <alert type="danger" ng-show="errorMessage">
+                    <div class="pre-wrap max-height-200">{{errorMessage}}</div>
+                </alert>
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-primary" type="submit" ng-click="saveClubDynamic()">
+                        <i class="icon-ok bigger-110"></i>
+                        保存
+                    </button>
+
+                    <button class="btn btn-default back" go-back>
+                        <i class="icon-undo bigger-110"></i>
+                        返回
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

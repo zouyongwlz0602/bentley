@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <title>VIP充值</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/dist/lib/weui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/dist/css/jquery-weui.css}" />
+    <script type="application/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+  //      var appid = /*[[${appid}]]*/ ;
+  //      var timestamp = /*[[${timestamp}]]*/ ;
+  //      var nonceStr = /*[[${nonceStr}]]*/ ;
+  //      var signature = /*[[${signature}]]*/ ;
+        var pay = /*[[${one_month}]]*/ ;
+        /*]]>*/
+
+    </script>
+    <script type="application/javascript">
+    /*    wx.config({
+            debug: true,
+            appId: appid,
+            timestamp: timestamp,
+            nonceStr: nonceStr,
+            signature: signature,
+            jsApiList:["closeWindow"]
+        });
+        wx.ready(function(){
+           // alert(location.href.split('#')[0]) ;
+            // $.alert(openid) ;
+        });
+        wx.error(function(res){
+
+        });*/
+    </script>
+
+</head>
+<body>
+
+<div class="weui_cells_title" style="font-size: 18px;">
+    支付:
+    <span id="money" style="color: red;">90</span>
+</div>
+<form method="post" th:method="post" action="" name="payform" id="payform">
+<div class="weui-row">
+    <div class="weui-col-5"></div>
+    <div class="weui-col-33">
+        <a class="weui_btn weui_btn_default" name="month" value="1">1个月</a>
+    </div>
+    <div class="weui-col-33">
+        <a class="weui_btn weui_btn_primary" name="month" value="3">3个月</a>
+    </div>
+    <div class="weui-col-33">
+        <a class="weui_btn weui_btn_default" name="month" value="6">6个月</a>
+    </div>
+    <div class="weui-col-5"></div>
+</div>
+<div style="height: 10px;"></div>
+<div class="weui-row">
+    <div class="weui-col-5"></div>
+    <div class="weui-col-33">
+        <a class="weui_btn weui_btn_default" name="month" value="12">12个月</a>
+    </div>
+    <div class="weui-col-33">
+        <a class="weui_btn weui_btn_default" name="month" value="24">24个月</a>
+    </div>
+    <div class="weui-col-33">
+        <a class="weui_btn weui_btn_default" name="month" value="36">36个月</a>
+    </div>
+    <div class="weui-col-5"></div>
+</div>
+<div class="weui_cells">
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label" style="width: 6em;">自定义时间</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="tel" name="month_in" value="3" placeholder="时间" />
+        </div>
+        <div class="weui_cell_hd"><label class="weui_label" style="width: 6em;">单位（月）</label></div>
+    </div>
+</div>
+</form>
+<div class="weui_cells_title">vip一个月30元</div>
+<div class="weui_extra_area">
+    <button class="weui_btn weui_btn_primary" id="pay_button" ontouchstart="">支付</button>
+</div>
+
+
+<script type="application/javascript" th:src="@{/resources/dist/lib/jquery-2.1.4.js}"></script>
+<script type="application/javascript" th:src="@{/resources/dist/js/jquery-weui.js}"></script>
+<script type="application/javascript">
+    function selectMonth(obj,month) {
+        $("a[name='month']").each(function() {
+            if(obj == this) {
+                $(this).removeClass("weui_btn_default").addClass("weui_btn_primary") ;
+            }else {
+                $(this).removeClass("weui_btn_primary").addClass("weui_btn_default") ;
+            }
+            $("input[name='month_in']").val(month) ;
+            $("#money").text(parseInt(month) * pay) ;
+        });
+    }
+    function setMonth(month) {
+        $("a[name='month']").each(function() {
+            var _this = this ;
+            if($(_this).attr("value") == month) {
+                $(_this).removeClass("weui_btn_default").addClass("weui_btn_primary") ;
+            }else {
+                $(_this).removeClass("weui_btn_primary").addClass("weui_btn_default") ;
+            }
+        });
+        $("input[name='month_in']").val(month) ;
+        $("#money").text(parseInt(month) * pay) ;
+    }
+    function payFuc() {
+        $.showLoading("数据加载中");
+        $("#pay_button").unbind("click") ;
+        var month = $("input[name='month_in']").val() ;
+        if(month == null || month == "") {
+            $.alert("请选择充值时间") ;
+            setMonth("1") ;
+            $("#pay_button").bind("click",payFuc()) ;
+            return false ;
+        }
+        var check = /^[0-9]+$/ ;
+        if(!check.test(month)) {
+            $.alert("预定天数只能是大于0的数字") ;
+            setMonth("1") ;
+            $("#pay_button").bind("click",payFuc()) ;
+            return false ;
+        }
+        $("#payform").attr("action","/wx/member/recharge/charge");
+        $("#payform").submit() ;
+
+    }
+    $(function() {
+        setMonth("3") ; //默认三个月
+        //绑定支付按钮事件
+        $("#pay_button").bind("click",function(){
+            payFuc();
+        }) ;
+        //绑定时间按钮事件
+        $("a[name='month']").each(function() {
+            var _this = this ;
+            $(_this).bind("click",function() {
+                selectMonth(_this,$(_this).attr("value") ) ;
+            });
+        });
+
+        //自定义时间文本框
+        var bind_name="input";//定义所要绑定的事件名称
+        if(navigator.userAgent.indexOf("MSIE")!=-1) bind_name="propertychange";//判断是否为IE内核 IE内核的事件名称要改为propertychange
+        /*输入框键盘离开事件绑定*/
+        var timer = null ;
+        $("input[name='month_in']").bind(bind_name,function() {
+            var _this = this ;
+            clearTimeout(timer) ;
+            timer = setTimeout(function() {
+                var month = $(_this).val() ;
+                if(month ==null || month=="" || month=="0") {
+                    month = "1" ;
+                }
+                var check = /^[0-9]+$/ ;
+                if(!check.test(month)) {
+                    $.alert("预定天数只能是大于0的数字") ;
+                    setMonth("1") ;
+                    return ;
+                }
+                setMonth(month) ;
+            },500);
+        });
+    });
+</script>
+</body>
+</html>
