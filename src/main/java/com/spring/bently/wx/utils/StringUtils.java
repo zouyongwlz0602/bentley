@@ -3,6 +3,7 @@ package com.spring.bently.wx.utils;
 import com.spring.bently.wx.utils.httptool.CustomHttpConnection;
 import com.spring.bently.wx.utils.httptool.HttpConnectionCommon;
 import org.apache.commons.codec.binary.Base64;
+import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
@@ -157,7 +158,7 @@ public class StringUtils {
         String response = customHttpConnection.httpClient(null) ;
         if (!StringUtils.isEmpty(response)) {
             Map map = JsonUtils.jsonToMap(response) ;
-            if (map != null && "0".equals(map.get("error"))) {
+            if (map != null && "0".equals(String.valueOf(map.get("error")))) {
                // byte[] xbuff = Base64.decodeFast(map.get("x"));
                // byte[] ybuff = Base64.decodeFast(map.get("y"));
                 result = getFromBase64(map.get("x").toString()) + "|" + getFromBase64(map.get("y").toString());
@@ -174,7 +175,6 @@ public class StringUtils {
         String url = "http://api.map.baidu.com/geocoder/v2/?location=" + arr[0] + "," + arr[1] + "&output=json&ak=9CSMnOb7VMbWQ5GQLMtR2gZoG0KS2Zcn&pois="+pois;
         CustomHttpConnection customHttpConnection = new CustomHttpConnection(new HttpConnectionCommon(url,"GET")) ;
         String json = customHttpConnection.httpClient(null) ;
-        System.out.println(json);
         return json ;
     }
 
@@ -182,10 +182,10 @@ public class StringUtils {
         byte[] b = null;
         String result = null;
         if (s != null) {
-            Base64 base64 = new Base64();
-            //BASE64Decoder decoder = new BASE64Decoder();
+            //Base64 base64 = new Base64();
+            BASE64Decoder decoder = new BASE64Decoder();
             try {
-                b = base64.decode(s);
+                b = decoder.decodeBuffer(s);
                 result = new String(b, "utf-8");
             } catch (Exception e) {
                 e.printStackTrace();

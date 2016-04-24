@@ -30,6 +30,9 @@ public class DateUtils {
      * @return
      */
     public static boolean equalDateTime(Date date1, Date date2) {
+        if(date1 == null || date1 == null){
+            return false;
+        }
         if(date1.getTime() >= date2.getTime()) {
             return false ;
         }

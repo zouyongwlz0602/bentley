@@ -62,7 +62,7 @@ public abstract class CommonController {
             model.addAttribute("msg",WeixinPropertiesUtils.getProperties("un_subscribe_message")) ;
             return "warning" ;
         }
-        if(!member.getIsVip() || DateUtils.equalDateTime(member.getEndTime(),new Date())) {
+        if(member.getEndTime() == null||!member.getIsVip() || DateUtils.equalDateTime(member.getEndTime(),new Date())) {
             model.addAttribute("msg",WeixinPropertiesUtils.getProperties("vip_message")) ;
             model.addAttribute("url","/wx/member/recharge") ;
             return "warning" ;
