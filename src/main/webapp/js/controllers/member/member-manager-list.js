@@ -9,7 +9,7 @@ define(['../module'], function(module) {
             if(data.data.success){
                 $scope.memberList = data.data.data;
             }else{
-                $.messager.alert('会员用户','会员查询失败，请重新操作!','error');
+                $scope.errorMessage ='会员查询失败，请重新操作';
             }
         });
     }]);

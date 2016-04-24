@@ -310,6 +310,18 @@ define(['app'], function(app) {
                 ncyBreadcrumb: {
                     label: "微信群发"
                 }
+            }).state('manager.order', {
+                url: '/managerOrder',
+                views: {
+                    'content@manager': {
+                        templateUrl: '/pages/member/order-list.html',
+                        controller: 'ManagerOrderInfoCtrl',
+                        controllerAs: 'vm'
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: "缴费记录"
+                }
             });
 
     }]);

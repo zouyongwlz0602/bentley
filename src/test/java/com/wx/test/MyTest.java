@@ -1,7 +1,6 @@
 package com.wx.test;
 
 import com.spring.bently.wx.utils.JsSdkSign;
-import com.spring.bently.wx.utils.StringUtils;
 import com.spring.bently.wx.utils.WeixinPropertiesUtils;
 import com.spring.bently.wx.utils.XmlUtils;
 import com.spring.bently.wx.utils.httptool.CustomHttpConnection;
@@ -114,7 +113,7 @@ public class MyTest {
     @Test
     public void testGetLocation() {
 
-        String ss = StringUtils.getBaiDuLocationXY("31.288692","121.34873") ;
+    /*    String ss = StringUtils.getBaiDuLocationXY("31.288692","121.34873") ;
         System.out.println(ss);
         String[] arr = ss.split("\\|") ;
         System.out.println(arr[0]);
@@ -123,6 +122,6 @@ public class MyTest {
         String url = "http://api.map.baidu.com/geocoder/v2/?location=" + arr[0] + "," + arr[1] + "&output=json&ak=9CSMnOb7VMbWQ5GQLMtR2gZoG0KS2Zcn&pois=40";
         CustomHttpConnection customHttpConnection = new CustomHttpConnection(new HttpConnectionCommon(url,"GET")) ;
         String json = customHttpConnection.httpClient(null) ;
-        System.out.println(json);
+        System.out.println(json);*/
     }
 }

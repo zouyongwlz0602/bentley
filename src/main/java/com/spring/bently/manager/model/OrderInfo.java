@@ -61,16 +61,16 @@ public class OrderInfo {
     private Date createTime;
 
     /**
-     * 开始时间
+     * 真实姓名
      */
-    @Column(length = 20)
-    private Date startTime;
+    @Column(length = 50)
+    private String realName ;
 
     /**
-     * 结束时间
+     * 电话号码
      */
-    @Column(length = 20)
-    private Date endTime;
+    @Column(length = 30)
+    private String telPhone ;
 
 
 
@@ -116,22 +116,21 @@ public class OrderInfo {
         this.createTime = createTime;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public String getTelPhone() {
+        return telPhone;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setTelPhone(String telPhone) {
+        this.telPhone = telPhone;
     }
-
 }
 
 

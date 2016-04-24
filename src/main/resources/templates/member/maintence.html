@@ -30,7 +30,7 @@
     <div class="weui_cell">
         <div class="weui_cell_hd"><label class="weui_label">日期</label></div>
         <div class="weui_cell_bd weui_cell_primary">
-            <input class="weui_input" name="wcdate" type="datetime-local" placeholder="" value="" />
+            <input class="weui_input" name="wcdate" id="datetime-picker" placeholder="" value="" />
 
         </div>
     </div>
@@ -43,6 +43,7 @@
 </form>
 <script type="application/javascript" th:src="@{/resources/dist/lib/jquery-2.1.4.js}"></script>
 <script type="application/javascript" th:src="@{/resources/dist/js/jquery-weui.js}"></script>
+<script type="application/javascript" th:src="@{/resources/js/timer.js}"></script>
 <script type="application/javascript">
 
     wx.config({

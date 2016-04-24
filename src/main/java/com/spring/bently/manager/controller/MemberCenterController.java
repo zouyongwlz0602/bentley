@@ -61,6 +61,9 @@ public class MemberCenterController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private OrderInfoDao orderInfoDao;
+
     private static Logger logger = LoggerFactory.getLogger(MemberCenterController.class);
 
     @RequestMapping("/get/washCarList")
@@ -305,6 +308,17 @@ public class MemberCenterController {
             return BentlyResponse.fail("消息发送失败");
         }
 
+    }
+
+
+    @RequestMapping("/get/orderInfoList")
+    public BentlyResponse getOrderInfoList(){
+        List<OrderInfo> list = Lists.newArrayList();
+        Iterator<OrderInfo> iterable = orderInfoDao.findAll().iterator();
+        while(iterable.hasNext()){
+            list.add(iterable.next());
+        }
+        return BentlyResponse.success(list);
     }
 
 

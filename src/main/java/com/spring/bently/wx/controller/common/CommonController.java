@@ -2,6 +2,7 @@ package com.spring.bently.wx.controller.common;
 
 import com.spring.bently.manager.dao.MemberDao;
 import com.spring.bently.manager.model.Member;
+import com.spring.bently.wx.utils.DateUtils;
 import com.spring.bently.wx.utils.WebAccessTokenUtil;
 import com.spring.bently.wx.utils.WeixinPropertiesUtils;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -60,7 +62,7 @@ public abstract class CommonController {
             model.addAttribute("msg",WeixinPropertiesUtils.getProperties("un_subscribe_message")) ;
             return "warning" ;
         }
-        if(!member.getIsVip()) {
+        if(!member.getIsVip() || DateUtils.equalDateTime(member.getEndTime(),new Date())) {
             model.addAttribute("msg",WeixinPropertiesUtils.getProperties("vip_message")) ;
             model.addAttribute("url","/wx/member/recharge") ;
             return "warning" ;

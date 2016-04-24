@@ -18,20 +18,22 @@
     <div class="weui_cell">
         <div class="weui_cell_hd"><label class="weui_label">日期</label></div>
         <div class="weui_cell_bd weui_cell_primary">
-            <input class="weui_input" name="destinedate" type="datetime-local" placeholder="" value="" />
+            <input class="weui_input" name="destinedate" id="datetime-picker" placeholder="" value="" />
         </div>
     </div>
 
     <div class="weui_cell">
-    <div class="weui_cell_hd"><label class="weui_label">天数</label></div>
-    <div class="weui_cell_bd weui_cell_primary">
-        <input class="weui_input" name="daynum" type="tel" placeholder="预定天数" />
+        <div class="weui_cell_hd"><label class="weui_label">天数</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" name="daynum" type="tel" placeholder="预定天数" />
+        </div>
     </div>
-</div>
 </div>
 <a href="javascript:;" id="submitButton" class="weui_btn weui_btn_primary">提交</a>
 </form>
 <script type="application/javascript" th:src="@{/resources/dist/lib/jquery-2.1.4.js}"></script>
 <script type="application/javascript" th:src="@{/resources/dist/js/jquery-weui.js}"></script>
+<script type="application/javascript" th:src="@{/resources/js/hoteldestine.js}"></script>
+<script type="application/javascript" th:src="@{/resources/js/timer.js}"></script>
 </body>
 </html>

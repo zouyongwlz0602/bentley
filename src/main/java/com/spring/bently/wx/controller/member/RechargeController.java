@@ -1,8 +1,11 @@
 package com.spring.bently.wx.controller.member;
 
 import com.spring.bently.manager.dao.MemberDao;
+import com.spring.bently.manager.dao.OrderInfoDao;
 import com.spring.bently.manager.model.Member;
+import com.spring.bently.manager.model.OrderInfo;
 import com.spring.bently.wx.controller.common.CommonController;
+import com.spring.bently.wx.utils.DateUtils;
 import com.spring.bently.wx.utils.WeixinPropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -29,9 +34,12 @@ public class RechargeController extends CommonController {
     @Autowired
     private MemberDao memberDao ;
 
+    @Autowired
+    private OrderInfoDao orderInfoDao ;
+
     @RequestMapping(value = "",method = RequestMethod.GET)
     public String view(HttpServletRequest request, HttpSession session,ModelMap model) {
-        Map userinfoMap = this.setUserInfoSession(request,session) ;
+     /*   Map userinfoMap = this.setUserInfoSession(request,session) ;
 
         if(userinfoMap == null) {
             return "error" ;
@@ -112,12 +120,31 @@ public class RechargeController extends CommonController {
         }else {
             return "error" ;
         }*/
+        //更新用户的vip到期时间
         Member member = getMemberDao().findByWechatid(userinfoMap.get("openid").toString()) ;
         member.setIsVip(true);
-
+        //设置vip的开始时间
+        if(member.getStartTime() == null) {
+            member.setStartTime(new Date());
+        }
+        //设置vip的到期时间
+        Date endDate = member.getEndTime() == null ? new Date() : member.getEndTime() ;
+        endDate = DateUtils.dateAddMonth(endDate, month_in) ;
+        member.setEndTime(endDate);
         getMemberDao().save(member) ;
-
-        model.addAttribute("msg","支付成功") ;
+        //添加订单信息
+        OrderInfo orderInfo = new OrderInfo() ;
+        log.info("member.getWechatname() = " + member.getWechatname());
+        orderInfo.setWechatname(member.getWechatname());
+        orderInfo.setWechatid(member.getWechatid());
+        orderInfo.setCreateTime(new Date());
+        //为了不损失精度
+        orderInfo.setMoney(new BigDecimal(month_in));
+        orderInfo.setMoney(orderInfo.getMoney().multiply(new BigDecimal(Integer.parseInt(WeixinPropertiesUtils.getProperties("one_month")))));
+        orderInfo.setRealName(request.getParameter("realname"));
+        orderInfo.setTelPhone(request.getParameter("telphone"));
+        orderInfoDao.save(orderInfo) ;
+        model.addAttribute("msg","感谢您的配合。稍后将会有我们的工作人员与您联系。") ;
         return "success" ;
     }
 

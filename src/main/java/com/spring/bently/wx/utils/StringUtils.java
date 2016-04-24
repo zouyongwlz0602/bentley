@@ -157,7 +157,7 @@ public class StringUtils {
         String response = customHttpConnection.httpClient(null) ;
         if (!StringUtils.isEmpty(response)) {
             Map map = JsonUtils.jsonToMap(response) ;
-            if (map != null && 0 == map.get("error")) {
+            if (map != null && "0".equals(map.get("error"))) {
                // byte[] xbuff = Base64.decodeFast(map.get("x"));
                // byte[] ybuff = Base64.decodeFast(map.get("y"));
                 result = getFromBase64(map.get("x").toString()) + "|" + getFromBase64(map.get("y").toString());
@@ -182,7 +182,7 @@ public class StringUtils {
         byte[] b = null;
         String result = null;
         if (s != null) {
-            Base64 base64 = new Base64() ;
+            Base64 base64 = new Base64();
             //BASE64Decoder decoder = new BASE64Decoder();
             try {
                 b = base64.decode(s);

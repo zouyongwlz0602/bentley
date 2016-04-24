@@ -14,7 +14,8 @@
     <div class="weui_icon_area"><i class="weui_icon_msg weui_icon_info"></i></div>
     <div class="weui_text_area">
         <p class="weui_msg_desc" th:text="${msg}"></p>
-        <p class="weui_msg_desc">
+        <p class="weui_msg_desc" th:if="${not #strings.isEmpty(url)}">
+            入会申请链接:
             <a th:href="@{${url}}" th:if="${not #strings.isEmpty(url)}" >点击加入我们</a>
         </p>
     </div>
